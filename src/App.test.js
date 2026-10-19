@@ -83,19 +83,13 @@ test("8 Тест проходит :  при клике на кнопку сра�
     target: { value: "123123" },
   });
 
-  // Создаём шпионскую функцию
   const onPress = jest.fn();
-
-  // Рендерим компонент, передавая шпион в пропс
   const { container } = render(<button onClick={onPress} />);
-  // Находим кнопку и имитируем клик
   // eslint-disable-next-line testing-library/no-node-access, testing-library/no-container
   const btn = container.querySelector("button");
   expect(btn).toBeInTheDocument();
 
   fireEvent.click(btn);
-
-  // Проверяем, что функция была вызвана
   expect(onPress).toHaveBeenCalled();
   expect(onPress).toHaveBeenCalledTimes(1);
 });
@@ -105,11 +99,7 @@ test("9 Тест проходит :  при клике на кнопку и до
   expect(input).toBeInTheDocument();
 
   const btn = screen.queryByTestId("btnInputItem");
-  // expect(btn).toBeInTheDocument();
-
   const listItemsElement = screen.queryByTestId("listItems");
-  // // eslint-disable-next-line no-use-before-define
-  // expect(listItemsElement).toMatchSnapshot();
 
   fireEvent.input(input, {
     target: { value: "123123" },
@@ -120,9 +110,6 @@ test("9 Тест проходит :  при клике на кнопку и до
   const listItems = listItemsElement.querySelectorAll("p");
 
   expect(listItems.length).toBeGreaterThanOrEqual(4); ///????
-
-  // // eslint-disable-next-line no-use-before-define
-  // expect(listItemsElement).toMatchSnapshot();
 });
 
 test("11 Тест проходит :  при клике на кнопку и добавляется новый параграф в конец списка", () => {
@@ -133,8 +120,6 @@ test("11 Тест проходит :  при клике на кнопку и д�
   expect(btn).toBeInTheDocument();
 
   const listItemsElement = screen.queryByTestId("listItems");
-  // // eslint-disable-next-line no-use-before-define
-  // expect(listItemsElement).toMatchSnapshot();
 
   fireEvent.input(input, {
     target: { value: "123123" },
@@ -148,9 +133,6 @@ test("11 Тест проходит :  при клике на кнопку и д�
     listItems[listItems.length - 1].innerText;
 
   expect(text).toBe("123123");
-
-  // // eslint-disable-next-line no-use-before-define
-  // expect(listItemsElement).toMatchSnapshot();
 });
 
 test("11 Тест проходит :  при клике на кнопку и добавляется новый параграф и содержится текст из поля", () => {
@@ -161,8 +143,6 @@ test("11 Тест проходит :  при клике на кнопку и д�
   expect(btn).toBeInTheDocument();
 
   const listItemsElement = screen.queryByTestId("listItems");
-  // // eslint-disable-next-line no-use-before-define
-  // expect(listItemsElement).toMatchSnapshot();
 
   const newText = "123123";
 
@@ -178,9 +158,6 @@ test("11 Тест проходит :  при клике на кнопку и д�
     listItems[listItems.length - 1].innerText;
 
   expect(text === newText).toBe(true);
-
-  // // eslint-disable-next-line no-use-before-define
-  // expect(listItemsElement).toMatchSnapshot();
 });
 
 test("12. Тест проходит :  после добавляется нового параграфа поле ввода очищается", () => {
@@ -229,10 +206,6 @@ test("14 Тест проходит :  если параграфов больше
   const listItems = listItemsElement.querySelectorAll("p");
 
   expect(listItems.length).toBeGreaterThanOrEqual(3); ///????
-
-  // // eslint-disable-next-line no-use-before-define
-  // expect(listItemsElement).toMatchSnapshot();
-
   const newText = "123123";
 
   fireEvent.input(input, {
@@ -254,9 +227,6 @@ test("14 Тест проходит :  если параграфов больше
   });
   fireEvent.click(btn);
   expect(listItems.length).toBeGreaterThanOrEqual(3); ///????
-
-  // // eslint-disable-next-line no-use-before-define
-  // expect(listItemsElement).toMatchSnapshot();
 });
 
 test("15 Тест проходит :  если параграфов больше 5 удаляется первый элемент", () => {
@@ -271,10 +241,6 @@ test("15 Тест проходит :  если параграфов больше
   const listItems = listItemsElement.querySelectorAll("p");
 
   const text = listItems[0].textContent || listItems[0].innerText;
-
-  // // eslint-disable-next-line no-use-before-define
-  // expect(listItemsElement).toMatchSnapshot();
-
   fireEvent.input(input, {
     target: { value: "123123" },
   });
@@ -286,9 +252,5 @@ test("15 Тест проходит :  если параграфов больше
   fireEvent.click(btn);
 
   const newText = listItems[0].textContent || listItems[0].innerText;
-
-  // // eslint-disable-next-line no-use-before-define
-  // expect(listItemsElement).toMatchSnapshot();
-
   expect(text === newText).toBe(false);
 });
